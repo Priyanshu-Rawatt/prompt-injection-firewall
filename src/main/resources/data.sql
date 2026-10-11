@@ -1,0 +1,1 @@
+-- Intentionally empty. H2/JPA creates the audit schema.

@@ -1,0 +1,15 @@
+services:
+  firewall:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      FIREWALL_API_TOKEN: demo-token
+      FIREWALL_OCR_ENABLED: "true"
+      FIREWALL_LLM_ENABLED: "true"
+      FIREWALL_LLM_PROVIDER: gemini
+      SPRING_AI_MODEL_CHAT: google-genai
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?Set GEMINI_API_KEY in your environment}
+      GEMINI_MODEL: gemini-2.5-flash-lite
+    volumes:
+      - ./data:/app/data

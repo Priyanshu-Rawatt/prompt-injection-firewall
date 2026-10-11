@@ -1,0 +1,13 @@
+package com.et.hackathon.firewall.dto;
+
+public enum AttackType {
+    INSTRUCTION_OVERRIDE,
+    ROLE_CHANGE,
+    SECRET_EXTRACTION,
+    TOOL_ABUSE,
+    CREDENTIAL_THEFT,
+    CONTEXT_POISONING,
+    MULTI_STEP_JAILBREAK,
+    ENCODED_INSTRUCTIONS,
+    INDIRECT_PROMPT_INJECTION
+}

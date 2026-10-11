@@ -1,0 +1,12 @@
+{
+  "name": "et-ai-prompt-injection-firewall",
+  "version": "1.0.0",
+  "description": "## Chosen problem This repository implements **Problem 2: Agentic Cybersecurity – Prompt Injection Firewall** from the supplied ET AI Hackathon problem statement.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
