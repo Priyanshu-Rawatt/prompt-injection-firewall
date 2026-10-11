@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#172b52"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#315ee8"/>
+      <stop offset="1" stop-color="#4d80ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#020817" flood-opacity=".22"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M1,1 L10,6 L1,11" fill="none" stroke="#7798e8" stroke-width="2"/>
+    </marker>
+    <marker id="arrowMuted" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M1,1 L10,6 L1,11" fill="none" stroke="#73849f" stroke-width="2"/>
+    </marker>
+    <style>
+      text{font-family:"Segoe UI",Arial,sans-serif}
+      .title{font-size:44px;font-weight:800;fill:#fff}
+      .subtitle{font-size:20px;fill:#bdcbea}
+      .label{font-size:16px;font-weight:800;letter-spacing:1.4px;fill:#8ba9ed}
+      .head{font-size:22px;font-weight:750;fill:#17243a}
+      .copy{font-size:16px;fill:#40516c}
+      .small{font-size:14px;fill:#52637d}
+      .box{fill:#fff;stroke:#dbe4f1;stroke-width:1.5}
+      .input{fill:#eef4ff;stroke:#bfd0f6;stroke-width:1.5}
+      .bluehead{fill:#e8efff}
+      .audit{fill:#eef8f3;stroke:#b9e3cb}
+      .fail{fill:#fff3ed;stroke:#ffd2bc}
+      .line{fill:none;stroke:#7798e8;stroke-width:3;marker-end:url(#arrow)}
+      .optional{fill:none;stroke:#a68cf3;stroke-width:3;stroke-dasharray:10 8;marker-end:url(#arrow)}
+      .softline{fill:none;stroke:#73849f;stroke-width:2.5;marker-end:url(#arrowMuted)}
+      .route{font-size:15px;font-weight:750;fill:#fff}
+      .tag{font-size:13px;font-weight:750;fill:#315ee8}
+    </style>
+  </defs>
+  <rect width="1920" height="1200" fill="url(#bg)"/>
+  <text x="72" y="76" class="label">ET AI HACKATHON · PROBLEM 2</text>
+  <text x="72" y="132" class="title">Prompt Injection Firewall — Structural Architecture</text>
+  <text x="72" y="170" class="subtitle">Untrusted content is parsed, inspected, policy-gated, and audited before it can enter an AI workflow.</text>
+
+  <text x="74" y="225" class="label">1 · UNTRUSTED INPUTS / TOKEN-PROTECTED INGRESS</text>
+  <rect x="62" y="232" width="1098" height="156" rx="20" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+  <g filter="url(#shadow)">
+    <rect x="72" y="248" width="260" height="124" rx="18" class="input"/>
+    <text x="96" y="286" class="head">Text / API</text>
+    <text x="96" y="318" class="copy">Direct user and retrieved text</text>
+    <text x="96" y="345" class="small">Server assigns source context</text>
+
+    <rect x="372" y="248" width="420" height="124" rx="18" class="input"/>
+    <text x="396" y="286" class="head">Document and media files</text>
+    <text x="396" y="318" class="copy">PDF · DOCX · EML · HTML · source</text>
+    <text x="396" y="345" class="small">PDFBox · POI · jsoup · MIME · Tesseract OCR</text>
+
+    <rect x="832" y="248" width="310" height="124" rx="18" class="input"/>
+    <text x="856" y="286" class="head">Web page URL</text>
+    <text x="856" y="318" class="copy">HTTP(S) fetch and text extraction</text>
+    <text x="856" y="345" class="small">Address checks · timeout · response-size cap</text>
+
+    <rect x="1182" y="248" width="320" height="124" rx="18" class="box"/>
+    <text x="1206" y="286" class="head">ApiTokenFilter</text>
+    <text x="1206" y="318" class="copy">Checks protected API token</text>
+    <text x="1206" y="345" class="small">Invalid or missing token → HTTP 401</text>
+
+    <rect x="1542" y="248" width="306" height="124" rx="18" class="box"/>
+    <text x="1566" y="286" class="head">Parse / Fetch</text>
+    <text x="1566" y="318" class="copy">Route direct, parsed, or fetched text</text>
+    <text x="1566" y="345" class="small">Unsupported / incomplete → reject</text>
+  </g>
+  <path d="M1160 310 H1172" class="line"/>
+  <path d="M1502 310 H1532" class="line"/>
+
+  <path d="M1695 372 V410 H203 V444" class="line"/>
+  <text x="420" y="430" class="label">2 · SHARED INSPECTION PIPELINE · ALL SUCCESSFULLY EXTRACTED SOURCES CONVERGE</text>
+  <g filter="url(#shadow)">
+    <rect x="72" y="454" width="262" height="142" rx="18" class="box"/>
+    <rect x="72" y="454" width="262" height="42" rx="18" class="bluehead"/>
+    <text x="96" y="483" class="head">Bound + normalize</text>
+    <text x="96" y="526" class="copy">Content-size check</text>
+    <text x="96" y="553" class="copy">Raw / URL / Base64 views</text>
+    <text x="96" y="578" class="small">Decoded views are never executed</text>
+
+    <rect x="374" y="454" width="320" height="142" rx="18" class="box"/>
+    <rect x="374" y="454" width="320" height="42" rx="18" class="bluehead"/>
+    <text x="398" y="483" class="head">Deterministic rules</text>
+    <text x="398" y="526" class="copy">Source-aware patterns</text>
+    <text x="398" y="553" class="copy">Nine attack categories</text>
+    <text x="398" y="578" class="small">Any emitted finding → BLOCK immediately</text>
+
+    <rect x="734" y="454" width="320" height="142" rx="18" class="box"/>
+    <rect x="734" y="454" width="320" height="42" rx="18" fill="#f0ebff"/>
+    <text x="758" y="483" class="head">Classifier gate</text>
+    <text x="758" y="526" class="copy">Runs only if rules find no attack</text>
+    <text x="758" y="553" class="copy">Configured Ollama or Gemini</text>
+    <text x="758" y="578" class="small">Failure / uncertainty → REVIEW</text>
+
+    <rect x="1094" y="454" width="346" height="142" rx="18" class="box"/>
+    <rect x="1094" y="454" width="346" height="42" rx="18" class="bluehead"/>
+    <text x="1118" y="483" class="head">Merge evidence + score</text>
+    <text x="1118" y="526" class="copy">ATTACK → BLOCK; safe verdict → ALLOW</text>
+    <text x="1118" y="553" class="copy">Rules block takes precedence</text>
+    <text x="1118" y="578" class="small">Trace records each inspection stage</text>
+
+    <rect x="1480" y="454" width="368" height="142" rx="18" class="box"/>
+    <rect x="1480" y="454" width="368" height="42" rx="18" class="bluehead"/>
+    <text x="1504" y="483" class="head">Policy decision</text>
+    <text x="1504" y="526" class="copy">Thresholds + source context</text>
+    <text x="1504" y="553" class="copy">Optional adjudication result</text>
+    <text x="1504" y="578" class="small">Configured defaults: 0.48 / 0.78</text>
+  </g>
+  <path d="M334 526 H364" class="line"/>
+  <path d="M694 526 H724" class="optional"/>
+  <path d="M1054 526 H1084" class="optional"/>
+  <path d="M1440 526 H1470" class="line"/>
+
+  <text x="1100" y="652" class="label">3 · DECISION AND MODEL-ACCESS BOUNDARY</text>
+  <g filter="url(#shadow)">
+    <rect x="72" y="676" width="220" height="92" rx="16" fill="#ffeded" stroke="#f5c4c4"/>
+    <text x="94" y="714" class="head">BLOCK</text>
+    <text x="94" y="744" class="small">Any rule finding or LLM ATTACK</text>
+
+    <rect x="316" y="676" width="220" height="92" rx="16" fill="#fff5e6" stroke="#f3d9a7"/>
+    <text x="338" y="714" class="head">REVIEW</text>
+    <text x="338" y="744" class="small">Ambiguous / unavailable</text>
+
+    <rect x="560" y="676" width="242" height="92" rx="16" fill="#eef5ff" stroke="#c4d8fa"/>
+    <text x="582" y="714" class="head">LEGACY ENUM</text>
+    <text x="582" y="744" class="small">SANITIZE not emitted by policy</text>
+
+    <rect x="826" y="676" width="196" height="92" rx="16" fill="#edfaf2" stroke="#bee5cb"/>
+    <text x="848" y="714" class="head">ALLOW</text>
+    <text x="848" y="744" class="small">Rules empty + benign verdict</text>
+
+    <rect x="1090" y="676" width="306" height="92" rx="16" class="box"/>
+    <text x="1114" y="714" class="head">Agent enforcement</text>
+    <text x="1114" y="742" class="small">BLOCK / REVIEW → 403</text>
+    <text x="1114" y="761" class="small">ALLOW may proceed</text>
+
+    <rect x="1464" y="676" width="384" height="92" rx="16" class="box"/>
+    <text x="1488" y="714" class="head">Spring AI model boundary</text>
+    <text x="1488" y="744" class="small">Gemini request advisor → model → response advisor</text>
+  </g>
+  <path d="M1664 596 V636 H182 V666" class="line"/>
+  <path d="M1664 636 H426 V666" class="line"/>
+  <path d="M1664 636 H681 V666" class="line"/>
+  <path d="M1664 636 H924 V666" class="line"/>
+  <path d="M1022 722 H1080" class="line"/>
+  <path d="M681 768 V786 H1060 V722 H1080" class="line"/>
+  <path d="M1396 722 H1454" class="line"/>
+  <path d="M1490 596 V612 H42 V858 H312 V864" class="softline"/>
+  <text x="1260" y="797" class="small">Only ALLOW is eligible; request checks run immediately before a configured model call.</text>
+
+  <text x="74" y="850" class="label">4 · PRIVACY, AUDIT, AND FAILURE CONTROLS</text>
+  <g filter="url(#shadow)">
+    <rect x="72" y="874" width="480" height="122" rx="18" class="audit"/>
+    <text x="98" y="912" class="head">Audit metadata · H2</text>
+    <text x="98" y="946" class="copy">Request ID · source · decision · risk · SHA-256 hash</text>
+    <text x="98" y="974" class="small">Raw content is not persisted in InspectionEvent.</text>
+
+    <rect x="592" y="874" width="580" height="122" rx="18" class="fail"/>
+    <text x="618" y="912" class="head">Fail-closed edges</text>
+    <text x="618" y="946" class="copy">Invalid token · over-limit text · parse/OCR failure · unsafe output</text>
+    <text x="618" y="974" class="small">Reject / REVIEW / BLOCK / withhold; never silently mark safe.</text>
+
+    <rect x="1212" y="874" width="636" height="122" rx="18" class="box"/>
+    <text x="1238" y="912" class="head">Operational visibility</text>
+    <text x="1238" y="946" class="copy">GET /api/v1/audit/recent · Actuator /health · /metrics</text>
+    <text x="1238" y="974" class="small">Response trace includes extraction provenance and policy stages.</text>
+  </g>
+  <path d="M1232 768 V830 H312 V864" class="softline"/>
+
+  <rect x="72" y="1040" width="1776" height="92" rx="18" fill="rgba(255,255,255,.09)" stroke="rgba(255,255,255,.18)"/>
+  <text x="98" y="1078" font-size="16" font-weight="800" fill="#d8e4ff">DEMO AND CLAIM LIMITS</text>
+  <text x="98" y="1106" font-size="16" fill="#e8eefb">Capture predates deterministic rule-block change; runtime Gemini returned HTTP 404, so safe prompts showed REVIEW. Authored fixtures are not held-out proof of D2/D3 reliability.</text>
+</svg>
